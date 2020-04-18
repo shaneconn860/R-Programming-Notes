@@ -1,0 +1,444 @@
+---
+title: "RProgramming Swirl Lesson 4-6"
+output: html_document
+---
+
+## Vectors
+
+The simplest and most common data structure in R is the vector.
+
+Vectors come in two different flavors: atomic vectors and lists. An atomic vector contains exactly one data type, whereas a list may contain multiple data types. We'll explore atomic vectors further before we get to lists.
+
+In previous lessons, we dealt entirely with numeric vectors, which are one type of atomic vector. Other types of atomic vectors include logical, character, integer, and complex. In this lesson, we'll take a closer look at logical and character vectors.
+
+Logical vectors can contain the values TRUE, FALSE, and NA (for 'not available'). These values are generated as the result of logical 'conditions'. Let's experiment with some simple conditions.
+
+First, create a numeric vector num_vect that contains the values 0.5, 55, -10, and 6.
+
+```{r}
+num_vect <- c(0.5, 55,-10, 6)
+```
+
+Now, create a variable called tf that gets the result of num_vect < 1, which is read as 'num_vect is less than 1'.
+
+```{r}
+tf <- num_vect < 1
+```
+
+What do you think tf will look like?
+
+1: a vector of 4 logical values
+
+2: a single logical value
+
+**Selection: 1**
+
+Print the contents of tf now.
+
+```{r}
+tf
+```
+
+The statement num_vect < 1 is a condition and tf tells us whether each corresponding element of our numeric vector num_vect satisfies this condition.
+
+The first element of num_vect is 0.5, which is less than 1 and therefore the statement 0.5 < 1 is TRUE. The second element of num_vect is 55, which is greater than 1, so the statement 55 < 1 is FALSE. The same logic applies for the third and fourth elements.
+
+Let's try another. Type num_vect >= 6 without assigning the result to a new variable.
+
+```{r}
+num_vect >= 6
+```
+
+This time, we are asking whether each individual element of num_vect is greater than OR equal to 6. Since only 55 and 6 are greater than or equal to 6, the second and fourth elements of the result are TRUE and the first and third elements are FALSE.
+
+The `<` and `>=` symbols in these examples are called 'logical operators'. Other logical operators include `>`, `<=`, `==` for exact equality, and `!=` for inequality.
+
+If we have two logical expressions, A and B, we can ask whether at least one is TRUE with A | B (logical 'or' a.k.a. 'union') or whether they are both TRUE with A & B (logical 'and' a.k.a. 'intersection'). Lastly, !A is the negation of A and is TRUE when A is FALSE and vice versa.
+
+It's a good idea to spend some time playing around with various combinations of these logical operators until you get comfortable with their use. We'll do a few examples here to get you started.
+
+Try your best to predict the result of each of the following statements. You can use pencil and paper to work them out if it's helpful. If you get stuck, just guess and you've got a 50% chance of getting the right answer!
+        
+(3 > 5) & (4 == 4)
+
+1: FALSE
+
+2: TRUE
+
+**Selection: 1**
+
+(TRUE == TRUE) | (TRUE == FALSE)
+
+1: FALSE
+
+2: TRUE
+
+**Selection: 2**
+
+((111 >= 111) | !(TRUE)) & ((4 + 1) == 5)
+
+1: FALSE
+
+2: TRUE
+
+**Selection: 2**
+
+Don't worry if you found these to be tricky. They're supposed to be. Working with logical statements in R takes practice, but your efforts will be rewarded in future lessons (e.g. subsetting and control structures).
+
+Character vectors are also very common in R. Double quotes are used to distinguish character objects, as in the following example.
+
+Create a character vector that contains the following words: "My", "name", "is". Remember to enclose each word in its own set of double quotes, so that R knows they are character strings. Store the vector in a variable called my_char.
+
+```{r}
+my_char <- c("My", "name", "is")
+```
+
+Print the contents of my_char to see what it looks like.
+
+```{r}
+my_char
+```
+
+Right now, my_char is a character vector of length 3. Let's say we want to join the elements of my_char together into one continuous character string (i.e. a character vector of length 1). We can do this using the paste() function.
+
+Type paste(my_char, collapse = " ") now. Make sure there's a space between the double quotes in the `collapse` argument. You'll see why in a second.
+
+```{r}
+paste(my_char, collapse = " ")
+```
+
+The `collapse` argument to the paste() function tells R that when we join together the elements of the my_char character vector, we'd like to separate them with single spaces.
+
+It seems that we're missing something.... Ah, yes! Your name!
+
+To add (or 'concatenate') your name to the end of my_char, use the c() function like this: c(my_char, "your_name_here"). Place your name in double quotes where I've put "your_name_here". Try it now, storing the result in a new variable called my_name.
+
+```{r}
+my_name <- c(my_char, "Billy")
+```
+
+```{r}
+my_name
+```
+
+Now, use the paste() function once more to join the words in my_name together into a single character string. Don't forget to say collapse = " "!
+        
+```{r}
+paste(my_name, collapse = " ")
+```
+
+In this example, we used the paste() function to collapse the elements of a single character vector. paste() can also be used to join the elements of multiple character vectors.
+
+In the simplest case, we can join two character vectors that are each of length 1 (i.e. join two words). Try paste("Hello", "world!", sep = " "), where the `sep` argument tells R that we want to separate the joined elements with a single space.
+
+```{r}
+paste("Hello", "world!", sep = " ")
+```
+
+For a slightly more complicated example, we can join two vectors, each of length 3. Use paste() to join the integer vector 1:3 with the character vector c("X", "Y", "Z"). This time, use sep = "" to leave no space between the joined elements.
+
+```{r}
+paste(1:3, c("X", "Y", "Z"), sep="")
+```
+
+What do you think will happen if our vectors are of different length? (Hint: we talked about this in a previous lesson.)
+
+Vector recycling! Try paste(LETTERS, 1:4, sep = "-"), where LETTERS is a predefined variable in R containing a character vector of all 26 letters in the English alphabet.
+
+```{r} 
+paste(LETTERS, 1:4, sep = "-")
+```
+
+Since the character vector LETTERS is longer than the numeric vector 1:4, R simply recycles, or repeats, 1:4 until it matches the length of LETTERS.
+
+Also worth noting is that the numeric vector 1:4 gets 'coerced' into a character vector by the paste() function.
+
+We'll discuss coercion in another lesson, but all it really means is that the numbers 1, 2, 3, and 4 in the output above are no longer numbers to R, but rather characters "1", "2", "3", and "4".
+
+## Missing Values
+
+Missing values play an important role in statistics and data analysis. Often, missing values must not be ignored, but rather they should be carefully studied to see if there's an underlying pattern or cause for their missingness.
+
+In R, NA is used to represent any value that is 'not available' or 'missing' (in the statistical sense). In this lesson, we'll explore missing values further.
+
+Any operation involving NA generally yields NA as the result. To illustrate, let's create a vector c(44, NA, 5, NA) and assign it to a variable x.
+
+```{r}
+x <- c(44, NA, 5, NA)
+```
+
+Now, let's multiply x by 3.
+
+```{r}
+x*3
+```
+
+Notice that the elements of the resulting vector that correspond with the NA values in x are also NA.
+
+To make things a little more interesting, lets create a vector containing 1000 draws from a standard normal distribution with y <- rnorm(1000).
+
+```{r}
+y <- rnorm(1000)
+```
+
+Next, let's create a vector containing 1000 NAs with z <- rep(NA, 1000).
+
+```{r}
+z <- rep(NA, 1000)
+```
+
+Finally, let's select 100 elements at random from these 2000 values (combining y and z) such that we don't know how many NAs we'll wind up with or what positions they'll occupy in our final vector -- my_data <- sample(c(y, z), 100).
+
+```{r}
+my_data <- sample(c(y, z), 100)
+```
+
+Let's first ask the question of where our NAs are located in our data. The is.na() function tells us whether each element of a vector is NA. Call is.na() on my_data and assign the result to my_na.
+
+```{r}
+my_na <- is.na(my_data)
+```
+
+Now, print my_na to see what you came up with.
+
+```{r}
+my_na
+```
+
+Everywhere you see a TRUE, you know the corresponding element of my_data is NA. Likewise, everywhere you see a FALSE, you know the corresponding element of my_data is one of our random draws from the standard normal distribution.
+
+In our previous discussion of logical operators, we introduced the `==` operator as a method of testing for equality between two objects. So, you might think the expression my_data == NA yields the same results as is.na(). Give it a try.
+
+```{r}
+my_data == NA
+```
+
+The reason you got a vector of all NAs is that NA is not really a value, but just a placeholder for a quantity that is not available. Therefore the logical expression is incomplete and R has no choice but to return a vector of the same length as my_data that contains all NAs.
+
+Don't worry if that's a little confusing. The key takeaway is to be cautious when using logical expressions anytime NAs might creep in, since a single NA value can derail the entire thing.
+
+So, back to the task at hand. Now that we have a vector, my_na, that has a TRUE for every NA and FALSE for every numeric value, we can compute the total number of NAs in our data.
+
+The trick is to recognize that underneath the surface, R represents TRUE as the number 1 and FALSE as the number 0. Therefore, if we take the sum of a bunch of TRUEs and FALSEs, we get the total number of TRUEs.
+
+Let's give that a try here. Call the sum() function on my_na to count the total number of TRUEs in my_na, and thus the total number of NAs in my_data. Don't assign the result to a new variable.
+
+```{r}
+sum(my_na)
+```
+
+Pretty cool, huh? Finally, let's take a look at the data to convince ourselves that everything 'adds up'. Print my_data to the console.
+
+```{r}
+my_data
+```
+
+Now that we've got NAs down pat, let's look at a second type of missing value -- NaN, which stands for 'not a number'. To generate NaN, try dividing (using a forward slash) 0 by 0 now.
+
+```{r}
+0/0
+```
+
+Let's do one more, just for fun. In R, Inf stands for infinity. What happens if you subtract Inf from Inf?
+
+```{r}
+Inf-Inf
+```
+
+## Subsetting Vectors
+
+In this lesson, we'll see how to extract elements from a vector based on some conditions that we specify.
+
+For example, we may only be interested in the first 20 elements of a vector, or only the elements that are not NA, or only those that are positive or correspond to a specific variable of interest. By the end of this lesson, you'll know how to handle each of these scenarios.
+
+I've created for you a vector called x that contains a random ordering of 20 numbers (from a standard normal distribution) and 20 NAs. Type x now to see what it looks like.
+
+```{r}
+x <- rnorm(n=40)
+y <- which(x %in% sample(x, 20))
+x[y] <- NA
+```
+
+```{r}
+x
+```
+
+The way you tell R that you want to select some particular elements (i.e. a 'subset') from a vector is by placing an 'index vector' in square brackets immediately following the name of the vector.
+
+For a simple example, try x[1:10] to view the first ten elements of x.
+
+```{r}
+x[1:10]
+```
+
+Index vectors come in four different flavors -- logical vectors, vectors of positive integers, vectors of negative integers, and vectors of character strings -- each of which we'll cover in this lesson.
+
+Let's start by indexing with logical vectors. One common scenario when working with real-world data is that we want to extract all elements of a vector that are not NA (i.e. missing data). Recall that is.na(x) yields a vector of logical values the same length as x, with TRUEs corresponding to NA values in x and FALSEs corresponding to non-NA values in x.
+
+What do you think x[is.na(x)] will give you?
+
+1: A vector of length 0
+
+2: A vector of all NAs
+
+3: A vector of TRUEs and FALSEs
+
+4: A vector with no NAs
+
+**Selection: 2**
+
+Prove it to yourself by typing x[is.na(x)].
+
+```{r}
+x[is.na(x)]
+```
+
+Recall that `!` gives us the negation of a logical expression, so !is.na(x) can be read as 'is not NA'. Therefore, if we want to create a vector called y that contains all of the non-NA values from x, we can use y <- x[!is.na(x)]. Give it a try.
+
+```{r}
+y <- x[!is.na(x)]
+```
+
+Print y to the console.
+
+```{r}
+y
+```
+
+Now that we've isolated the non-missing values of x and put them in y, we can subset y as we please.
+
+Recall that the expression y > 0 will give us a vector of logical values the same length as y, with TRUEs corresponding to values of y that are greater than zero and FALSEs corresponding to values of y that are less than or equal to zero. What do you think y[y > 0] will give you?
+
+1: A vector of all the positive elements of y
+
+2: A vector of all NAs
+
+3: A vector of length 0
+
+4: A vector of TRUEs and FALSEs
+
+5: A vector of all the negative elements of y
+
+**Selection: 1**
+
+Type y[y > 0] to see that we get all of the positive elements of y, which are also the positive elements of our original vector x.
+
+```{r}
+y[y > 0]
+```
+
+You might wonder why we didn't just start with x[x > 0] to isolate the positive elements of x. Try that now to see why.
+
+```{r}
+x[x > 0]
+```
+
+Since NA is not a value, but rather a placeholder for an unknown quantity, the expression NA > 0 evaluates to NA. Hence we get a bunch of NAs mixed in with our positive numbers when we do this.
+
+Combining our knowledge of logical operators with our new knowledge of subsetting, we could do this -- x[!is.na(x) & x > 0]. Try it out.
+
+```{r}
+x[!is.na(x) & x > 0]
+```
+
+In this case, we request only values of x that are both non-missing AND greater than zero.
+
+I've already shown you how to subset just the first ten values of x using x[1:10]. In this case, we're providing a vector of positive integers inside of the square brackets, which tells R to return only the elements of x numbered 1 through 10.
+
+Many programming languages use what's called 'zero-based indexing', which means that the first element of a vector is considered element 0. R uses 'one-based indexing', which (you guessed it!) means the first element of a vector is considered element 1.
+
+Can you figure out how we'd subset the 3rd, 5th, and 7th elements of x? Hint -- Use the c() function to specify the element numbers as a numeric vector.
+
+```{r}
+x[c(3, 5, 7)]
+```
+
+It's important that when using integer vectors to subset our vector x, we stick with the set of indexes {1, 2, ..., 40} since x only has 40 elements. What happens if we ask for the zeroth element of x (i.e. x[0])? Give it a try.
+
+```{r}
+x[0]
+```
+
+As you might expect, we get nothing useful. Unfortunately, R doesn't prevent us from doing this. What if we ask for the 3000th element of x? Try it out.
+
+```{r}
+x[3000]
+```
+
+Again, nothing useful, but R doesn't prevent us from asking for it. This should be a cautionary tale. You should always make sure that what you are asking for is within the bounds of the vector you're working with.
+
+What if we're interested in all elements of x EXCEPT the 2nd and 10th? It would be pretty tedious to construct a vector containing all numbers 1 through 40 EXCEPT 2 and 10.
+
+Luckily, R accepts negative integer indexes. Whereas x[c(2, 10)] gives us ONLY the 2nd and 10th elements of x, x[c(-2, -10)] gives us all elements of x EXCEPT for the 2nd and 10 elements.  Try x[c(-2, -10)] now to see this.
+
+```{r}
+x[c(-2, -10)]
+```
+
+A shorthand way of specifying multiple negative numbers is to put the negative sign out in front of the vector of positive numbers. Type x[-c(2, 10)] to get the exact same result.
+
+```{r}
+x[-c(2, 10)]
+```
+
+So far, we've covered three types of index vectors -- logical, positive integer, and negative integer. The only remaining type requires us to introduce the concept of 'named' elements.
+
+Create a numeric vector with three named elements using vect <- c(foo = 11, bar = 2, norf = NA).
+
+```{r}
+vect <- c(foo = 11, bar = 2, norf = NA)
+```
+
+When we print vect to the console, you'll see that each element has a name. Try it out.
+
+```{r}
+vect
+```
+
+We can also get the names of vect by passing vect as an argument to the names() function. Give that a try.
+
+```{r}
+names(vect)
+```
+
+Alternatively, we can create an unnamed vector vect2 with c(11, 2, NA). Do that now.
+
+```{r}
+vect2 <- c(11, 2, NA)
+```
+
+Then, we can add the `names` attribute to vect2 after the fact with names(vect2) <- c("foo", "bar", "norf"). Go ahead.
+
+```{r}
+names(vect2) <- c("foo", "bar", "norf")
+```
+
+Now, let's check that vect and vect2 are the same by passing them as arguments to the identical() function.
+
+```{r}
+identical(vect, vect2)
+```
+
+Indeed, vect and vect2 are identical named vectors.
+
+Now, back to the matter of subsetting a vector by named elements. Which of the following commands do you think would give us the second element of vect?
+
+1: vect[bar]
+
+2: vect["bar"]
+
+3: vect["2"]
+
+**Selection: 2**
+
+```{r}
+vect["bar"]
+```
+
+Likewise, we can specify a vector of names with vect[c("foo", "bar")]. Try it out.
+
+```{r}
+vect[c("foo", "bar")]
+```
+
+Now you know all four methods of subsetting data from vectors. Different approaches are best in different scenarios and when in doubt, try it out!
