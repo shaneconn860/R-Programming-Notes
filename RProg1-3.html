@@ -471,9 +471,15 @@ summary {
 <h2>Workspace and Files</h2>
 <p>List all the files in your working directory using list.files() or dir().</p>
 <pre class="r"><code>dir()</code></pre>
-<pre><code>##  [1] &quot;flag_data.csv&quot;   &quot;RProg1-3.Rmd&quot;    &quot;RProg1.html&quot;     &quot;RProg10-12.html&quot;
-##  [5] &quot;RProg10-12.Rmd&quot;  &quot;RProg13-15.html&quot; &quot;RProg13-15.Rmd&quot;  &quot;RProg4-6.html&quot;  
-##  [9] &quot;RProg4-6.Rmd&quot;    &quot;RProg7-9.html&quot;   &quot;RProg7-9.Rmd&quot;</code></pre>
+<pre><code>##  [1] &quot;flag_data.csv&quot;             &quot;mytest2.R&quot;                
+##  [3] &quot;mytest3.R&quot;                 &quot;R-Programming-Notes.Rproj&quot;
+##  [5] &quot;README.md&quot;                 &quot;RProg1-3.html&quot;            
+##  [7] &quot;RProg1-3.Rmd&quot;              &quot;RProg1.html&quot;              
+##  [9] &quot;RProg10-12.html&quot;           &quot;RProg10-12.Rmd&quot;           
+## [11] &quot;RProg13-15.html&quot;           &quot;RProg13-15.Rmd&quot;           
+## [13] &quot;RProg4-6.html&quot;             &quot;RProg4-6.Rmd&quot;             
+## [15] &quot;RProg7-9.html&quot;             &quot;RProg7-9.Rmd&quot;             
+## [17] &quot;testdir&quot;                   &quot;testdir2&quot;</code></pre>
 <p>Use the args() function to determine the arguments to list.files().</p>
 <pre class="r"><code>args(list.files)</code></pre>
 <pre><code>## function (path = &quot;.&quot;, pattern = NULL, all.files = FALSE, full.names = FALSE, 
@@ -485,6 +491,7 @@ summary {
 <p>We will use old.dir at the end of this lesson to move back to the place that we started. A lot of query functions like getwd() have the useful property that they return the answer to the question as a result of the function.</p>
 <p>Use dir.create() to create a directory in the current working directory called “testdir”.</p>
 <pre class="r"><code>dir.create(&quot;testdir&quot;)</code></pre>
+<pre><code>## Warning in dir.create(&quot;testdir&quot;): 'testdir' already exists</code></pre>
 <p>We will do all our work in this new directory and then delete it after we are done. This is the R analog to “Take only pictures, leave only footprints.”</p>
 <p>Set your working directory to “testdir” with the setwd() command.</p>
 <pre class="r"><code>setwd(&quot;testdir&quot;)</code></pre>
@@ -493,10 +500,16 @@ summary {
 <pre><code>## [1] TRUE</code></pre>
 <p>This should be the only file in this newly created directory. Let’s check this by listing all the files in the current directory.</p>
 <pre class="r"><code>dir()</code></pre>
-<pre><code>##  [1] &quot;flag_data.csv&quot;   &quot;mytest.R&quot;        &quot;RProg1-3.Rmd&quot;    &quot;RProg1.html&quot;    
-##  [5] &quot;RProg10-12.html&quot; &quot;RProg10-12.Rmd&quot;  &quot;RProg13-15.html&quot; &quot;RProg13-15.Rmd&quot; 
-##  [9] &quot;RProg4-6.html&quot;   &quot;RProg4-6.Rmd&quot;    &quot;RProg7-9.html&quot;   &quot;RProg7-9.Rmd&quot;   
-## [13] &quot;testdir&quot;</code></pre>
+<pre><code>##  [1] &quot;flag_data.csv&quot;             &quot;mytest.R&quot;                 
+##  [3] &quot;mytest2.R&quot;                 &quot;mytest3.R&quot;                
+##  [5] &quot;R-Programming-Notes.Rproj&quot; &quot;README.md&quot;                
+##  [7] &quot;RProg1-3.html&quot;             &quot;RProg1-3.Rmd&quot;             
+##  [9] &quot;RProg1.html&quot;               &quot;RProg10-12.html&quot;          
+## [11] &quot;RProg10-12.Rmd&quot;            &quot;RProg13-15.html&quot;          
+## [13] &quot;RProg13-15.Rmd&quot;            &quot;RProg4-6.html&quot;            
+## [15] &quot;RProg4-6.Rmd&quot;              &quot;RProg7-9.html&quot;            
+## [17] &quot;RProg7-9.Rmd&quot;              &quot;testdir&quot;                  
+## [19] &quot;testdir2&quot;</code></pre>
 <p>Check to see if “mytest.R” exists in the working directory using the file.exists() function.</p>
 <pre class="r"><code>file.exists(&quot;mytest.R&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -504,9 +517,9 @@ summary {
 <p>Access information about the file “mytest.R” by using file.info().</p>
 <pre class="r"><code>file.info(&quot;mytest.R&quot;)</code></pre>
 <pre><code>##          size isdir mode               mtime               ctime
-## mytest.R    0 FALSE  644 2020-04-18 14:23:25 2020-04-18 14:23:25
+## mytest.R    0 FALSE  644 2020-04-18 14:54:05 2020-04-18 14:54:05
 ##                        atime uid gid            uname grname
-## mytest.R 2020-04-18 14:23:25 501  20 shaneconnaughton  staff</code></pre>
+## mytest.R 2020-04-18 14:54:05 501  20 shaneconnaughton  staff</code></pre>
 <p>You can use the $ operator — e.g., file.info(“mytest.R”)$mode — to grab specific items.</p>
 <p>Change the name of the file “mytest.R” to “mytest2.R” by using file.rename().</p>
 <pre class="r"><code>file.rename(&quot;mytest.R&quot;, &quot;mytest2.R&quot;)</code></pre>
@@ -514,7 +527,7 @@ summary {
 <p>Your operating system will provide simpler tools for these sorts of tasks, but having the ability to manipulate files programatically is useful. You might now try to delete mytest.R using file.remove(‘mytest.R’), but that won’t work since mytest.R no longer exists. You have already renamed it.</p>
 <p>Make a copy of “mytest2.R” called “mytest3.R” using file.copy().</p>
 <pre class="r"><code>file.copy(&quot;mytest2.R&quot;, &quot;mytest3.R&quot;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 <p>You now have two files in the current directory. That may not seem very interesting. But what if you were working with dozens, or millions, of individual files? In that case, being able to programatically act on many files would be absolutely necessary. Don’t forget that you can, temporarily, leave the lesson by typing play() and then return by typing nxt().</p>
 <p>Provide the relative path to the file “mytest3.R” by using file.path().</p>
 <pre class="r"><code>file.path(&quot;mytest3.R&quot;)</code></pre>
@@ -524,6 +537,8 @@ summary {
 <pre><code>## [1] &quot;folder1/folder2&quot;</code></pre>
 <p>Create a directory in the current working directory called “testdir2” and a subdirectory for it called “testdir3”, all in one command by using dir.create() and file.path().</p>
 <pre class="r"><code>dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)</code></pre>
+<pre><code>## Warning in dir.create(file.path(&quot;testdir2&quot;, &quot;testdir3&quot;), recursive = TRUE):
+## 'testdir2/testdir3' already exists</code></pre>
 </div>
 
 
