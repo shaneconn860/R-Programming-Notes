@@ -462,15 +462,15 @@ summary {
 <pre class="r"><code>my_na &lt;- is.na(my_data)</code></pre>
 <p>Now, print my_na to see what you came up with.</p>
 <pre class="r"><code>my_na</code></pre>
-<pre><code>##   [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE
-##  [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
-##  [25] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE
-##  [37] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-##  [49] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE
-##  [61] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE
-##  [73] FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE
-##  [85]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
-##  [97] FALSE  TRUE FALSE  TRUE</code></pre>
+<pre><code>##   [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE
+##  [13] FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE
+##  [25] FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE
+##  [37] FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE
+##  [49] FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE
+##  [61] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
+##  [73] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE
+##  [85]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
+##  [97]  TRUE  TRUE  TRUE  TRUE</code></pre>
 <p>Everywhere you see a TRUE, you know the corresponding element of my_data is NA. Likewise, everywhere you see a FALSE, you know the corresponding element of my_data is one of our random draws from the standard normal distribution.</p>
 <p>In our previous discussion of logical operators, we introduced the <code>==</code> operator as a method of testing for equality between two objects. So, you might think the expression my_data == NA yields the same results as is.na(). Give it a try.</p>
 <pre class="r"><code>my_data == NA</code></pre>
@@ -484,26 +484,26 @@ summary {
 <p>The trick is to recognize that underneath the surface, R represents TRUE as the number 1 and FALSE as the number 0. Therefore, if we take the sum of a bunch of TRUEs and FALSEs, we get the total number of TRUEs.</p>
 <p>Let’s give that a try here. Call the sum() function on my_na to count the total number of TRUEs in my_na, and thus the total number of NAs in my_data. Don’t assign the result to a new variable.</p>
 <pre class="r"><code>sum(my_na)</code></pre>
-<pre><code>## [1] 57</code></pre>
+<pre><code>## [1] 54</code></pre>
 <p>Pretty cool, huh? Finally, let’s take a look at the data to convince ourselves that everything ‘adds up’. Print my_data to the console.</p>
 <pre class="r"><code>my_data</code></pre>
-<pre><code>##   [1] -0.73742709          NA          NA          NA -0.47702581          NA
-##   [7]          NA  1.37563043  0.16854329  1.34694286          NA -0.29469409
-##  [13]          NA          NA          NA          NA          NA          NA
-##  [19]          NA          NA          NA          NA          NA  0.93219997
-##  [25]  0.05981741 -0.48274623          NA  0.17188663  0.10438403          NA
-##  [31]          NA          NA          NA  0.44640886          NA  1.19222211
-##  [37]  1.35704620  1.54975637          NA          NA          NA          NA
-##  [43]  0.70071112 -0.55661358  0.93878104          NA          NA          NA
-##  [49]  0.53381032  0.09708650  1.36148705          NA          NA          NA
-##  [55]          NA -3.27041753  0.52967807  0.01467297          NA          NA
-##  [61] -1.71208056 -0.93057187 -0.43835979          NA          NA          NA
-##  [67]          NA -1.17093164          NA -1.03986050          NA  1.76433806
-##  [73]  0.59333491  1.21933820          NA  0.75344822          NA          NA
-##  [79] -0.92397042 -0.23534582          NA  1.71940249  0.05159717          NA
-##  [85]          NA -0.20143942  3.01194798 -0.36626344          NA          NA
-##  [91]          NA -1.53569573          NA          NA          NA          NA
-##  [97] -0.83496010          NA -0.07938506          NA</code></pre>
+<pre><code>##   [1]          NA          NA  0.95107088  0.51737317  0.57984505          NA
+##   [7]          NA  0.60311652          NA  1.70734309 -0.65550960          NA
+##  [13] -1.17506875          NA          NA  0.58127315  1.73622088 -2.51894142
+##  [19]          NA  0.63274519 -0.28506689  0.24900674          NA          NA
+##  [25] -0.53181164  0.57750565          NA          NA -1.66494424 -1.07582888
+##  [31]          NA          NA          NA  0.92905639 -1.55468176          NA
+##  [37] -0.01358975  0.14747461 -0.35564793          NA          NA -0.25069162
+##  [43]          NA          NA  0.87324211 -1.31787194          NA -0.56565990
+##  [49]  0.86814036  0.70598709          NA  0.87666619          NA          NA
+##  [55]  0.66653603          NA  1.14348211          NA          NA          NA
+##  [61] -0.26335206          NA  0.75952208 -1.10683588          NA  2.14115941
+##  [67]          NA          NA -0.67053004          NA          NA          NA
+##  [73]  0.63232854 -0.65810984  1.53672339  0.74814952          NA  1.34002592
+##  [79]          NA          NA -0.56383168 -0.01033865 -0.44981743          NA
+##  [85]          NA          NA          NA          NA          NA          NA
+##  [91]          NA  0.37401959  0.73080214          NA          NA          NA
+##  [97]          NA          NA          NA          NA</code></pre>
 <p>Now that we’ve got NAs down pat, let’s look at a second type of missing value – NaN, which stands for ‘not a number’. To generate NaN, try dividing (using a forward slash) 0 by 0 now.</p>
 <pre class="r"><code>0/0</code></pre>
 <pre><code>## [1] NaN</code></pre>
@@ -520,18 +520,18 @@ summary {
 y &lt;- which(x %in% sample(x, 20))
 x[y] &lt;- NA</code></pre>
 <pre class="r"><code>x</code></pre>
-<pre><code>##  [1] -0.3370085  0.1709573         NA         NA -0.5446850  0.4069071
-##  [7]  0.4127180         NA -0.1624554         NA         NA  0.6803633
-## [13]         NA  2.0167127         NA  1.7233937  2.5601341 -1.3037740
-## [19]  0.6705978         NA  0.1171085         NA  0.7867832         NA
-## [25]         NA         NA  0.4398478         NA  1.2712580         NA
-## [31]         NA         NA         NA         NA         NA -1.6271037
-## [37] -0.6653891         NA  1.4460880 -0.7411789</code></pre>
+<pre><code>##  [1] -0.73063446          NA -1.16753808  0.14637887          NA          NA
+##  [7]          NA -0.49591811 -0.05857883  0.65473910  0.53330157          NA
+## [13]          NA  1.22492538 -0.52732965          NA  0.02512317          NA
+## [19]          NA          NA  0.21245589          NA -0.73669234          NA
+## [25]  0.37744541          NA -0.45367206          NA          NA -0.89876120
+## [31]          NA          NA -0.48343491 -0.27182534 -0.91219286          NA
+## [37] -0.65748730          NA          NA  0.55271879</code></pre>
 <p>The way you tell R that you want to select some particular elements (i.e. a ‘subset’) from a vector is by placing an ‘index vector’ in square brackets immediately following the name of the vector.</p>
 <p>For a simple example, try x[1:10] to view the first ten elements of x.</p>
 <pre class="r"><code>x[1:10]</code></pre>
-<pre><code>##  [1] -0.3370085  0.1709573         NA         NA -0.5446850  0.4069071
-##  [7]  0.4127180         NA -0.1624554         NA</code></pre>
+<pre><code>##  [1] -0.73063446          NA -1.16753808  0.14637887          NA          NA
+##  [7]          NA -0.49591811 -0.05857883  0.65473910</code></pre>
 <p>Index vectors come in four different flavors – logical vectors, vectors of positive integers, vectors of negative integers, and vectors of character strings – each of which we’ll cover in this lesson.</p>
 <p>Let’s start by indexing with logical vectors. One common scenario when working with real-world data is that we want to extract all elements of a vector that are not NA (i.e. missing data). Recall that is.na(x) yields a vector of logical values the same length as x, with TRUEs corresponding to NA values in x and FALSEs corresponding to non-NA values in x.</p>
 <p>What do you think x[is.na(x)] will give you?</p>
@@ -547,10 +547,10 @@ x[y] &lt;- NA</code></pre>
 <pre class="r"><code>y &lt;- x[!is.na(x)]</code></pre>
 <p>Print y to the console.</p>
 <pre class="r"><code>y</code></pre>
-<pre><code>##  [1] -0.3370085  0.1709573 -0.5446850  0.4069071  0.4127180 -0.1624554
-##  [7]  0.6803633  2.0167127  1.7233937  2.5601341 -1.3037740  0.6705978
-## [13]  0.1171085  0.7867832  0.4398478  1.2712580 -1.6271037 -0.6653891
-## [19]  1.4460880 -0.7411789</code></pre>
+<pre><code>##  [1] -0.73063446 -1.16753808  0.14637887 -0.49591811 -0.05857883  0.65473910
+##  [7]  0.53330157  1.22492538 -0.52732965  0.02512317  0.21245589 -0.73669234
+## [13]  0.37744541 -0.45367206 -0.89876120 -0.48343491 -0.27182534 -0.91219286
+## [19] -0.65748730  0.55271879</code></pre>
 <p>Now that we’ve isolated the non-missing values of x and put them in y, we can subset y as we please.</p>
 <p>Recall that the expression y &gt; 0 will give us a vector of logical values the same length as y, with TRUEs corresponding to values of y that are greater than zero and FALSEs corresponding to values of y that are less than or equal to zero. What do you think y[y &gt; 0] will give you?</p>
 <p>1: A vector of all the positive elements of y</p>
@@ -561,26 +561,26 @@ x[y] &lt;- NA</code></pre>
 <p><strong>Selection: 1</strong></p>
 <p>Type y[y &gt; 0] to see that we get all of the positive elements of y, which are also the positive elements of our original vector x.</p>
 <pre class="r"><code>y[y &gt; 0]</code></pre>
-<pre><code>##  [1] 0.1709573 0.4069071 0.4127180 0.6803633 2.0167127 1.7233937 2.5601341
-##  [8] 0.6705978 0.1171085 0.7867832 0.4398478 1.2712580 1.4460880</code></pre>
+<pre><code>## [1] 0.14637887 0.65473910 0.53330157 1.22492538 0.02512317 0.21245589 0.37744541
+## [8] 0.55271879</code></pre>
 <p>You might wonder why we didn’t just start with x[x &gt; 0] to isolate the positive elements of x. Try that now to see why.</p>
 <pre class="r"><code>x[x &gt; 0]</code></pre>
-<pre><code>##  [1] 0.1709573        NA        NA 0.4069071 0.4127180        NA        NA
-##  [8]        NA 0.6803633        NA 2.0167127        NA 1.7233937 2.5601341
-## [15] 0.6705978        NA 0.1171085        NA 0.7867832        NA        NA
-## [22]        NA 0.4398478        NA 1.2712580        NA        NA        NA
-## [29]        NA        NA        NA        NA 1.4460880</code></pre>
+<pre><code>##  [1]         NA 0.14637887         NA         NA         NA 0.65473910
+##  [7] 0.53330157         NA         NA 1.22492538         NA 0.02512317
+## [13]         NA         NA         NA 0.21245589         NA         NA
+## [19] 0.37744541         NA         NA         NA         NA         NA
+## [25]         NA         NA         NA 0.55271879</code></pre>
 <p>Since NA is not a value, but rather a placeholder for an unknown quantity, the expression NA &gt; 0 evaluates to NA. Hence we get a bunch of NAs mixed in with our positive numbers when we do this.</p>
 <p>Combining our knowledge of logical operators with our new knowledge of subsetting, we could do this – x[!is.na(x) &amp; x &gt; 0]. Try it out.</p>
 <pre class="r"><code>x[!is.na(x) &amp; x &gt; 0]</code></pre>
-<pre><code>##  [1] 0.1709573 0.4069071 0.4127180 0.6803633 2.0167127 1.7233937 2.5601341
-##  [8] 0.6705978 0.1171085 0.7867832 0.4398478 1.2712580 1.4460880</code></pre>
+<pre><code>## [1] 0.14637887 0.65473910 0.53330157 1.22492538 0.02512317 0.21245589 0.37744541
+## [8] 0.55271879</code></pre>
 <p>In this case, we request only values of x that are both non-missing AND greater than zero.</p>
 <p>I’ve already shown you how to subset just the first ten values of x using x[1:10]. In this case, we’re providing a vector of positive integers inside of the square brackets, which tells R to return only the elements of x numbered 1 through 10.</p>
 <p>Many programming languages use what’s called ‘zero-based indexing’, which means that the first element of a vector is considered element 0. R uses ‘one-based indexing’, which (you guessed it!) means the first element of a vector is considered element 1.</p>
 <p>Can you figure out how we’d subset the 3rd, 5th, and 7th elements of x? Hint – Use the c() function to specify the element numbers as a numeric vector.</p>
 <pre class="r"><code>x[c(3, 5, 7)]</code></pre>
-<pre><code>## [1]        NA -0.544685  0.412718</code></pre>
+<pre><code>## [1] -1.167538        NA        NA</code></pre>
 <p>It’s important that when using integer vectors to subset our vector x, we stick with the set of indexes {1, 2, …, 40} since x only has 40 elements. What happens if we ask for the zeroth element of x (i.e. x[0])? Give it a try.</p>
 <pre class="r"><code>x[0]</code></pre>
 <pre><code>## numeric(0)</code></pre>
@@ -591,22 +591,22 @@ x[y] &lt;- NA</code></pre>
 <p>What if we’re interested in all elements of x EXCEPT the 2nd and 10th? It would be pretty tedious to construct a vector containing all numbers 1 through 40 EXCEPT 2 and 10.</p>
 <p>Luckily, R accepts negative integer indexes. Whereas x[c(2, 10)] gives us ONLY the 2nd and 10th elements of x, x[c(-2, -10)] gives us all elements of x EXCEPT for the 2nd and 10 elements. Try x[c(-2, -10)] now to see this.</p>
 <pre class="r"><code>x[c(-2, -10)]</code></pre>
-<pre><code>##  [1] -0.3370085         NA         NA -0.5446850  0.4069071  0.4127180
-##  [7]         NA -0.1624554         NA  0.6803633         NA  2.0167127
-## [13]         NA  1.7233937  2.5601341 -1.3037740  0.6705978         NA
-## [19]  0.1171085         NA  0.7867832         NA         NA         NA
-## [25]  0.4398478         NA  1.2712580         NA         NA         NA
-## [31]         NA         NA         NA -1.6271037 -0.6653891         NA
-## [37]  1.4460880 -0.7411789</code></pre>
+<pre><code>##  [1] -0.73063446 -1.16753808  0.14637887          NA          NA          NA
+##  [7] -0.49591811 -0.05857883  0.53330157          NA          NA  1.22492538
+## [13] -0.52732965          NA  0.02512317          NA          NA          NA
+## [19]  0.21245589          NA -0.73669234          NA  0.37744541          NA
+## [25] -0.45367206          NA          NA -0.89876120          NA          NA
+## [31] -0.48343491 -0.27182534 -0.91219286          NA -0.65748730          NA
+## [37]          NA  0.55271879</code></pre>
 <p>A shorthand way of specifying multiple negative numbers is to put the negative sign out in front of the vector of positive numbers. Type x[-c(2, 10)] to get the exact same result.</p>
 <pre class="r"><code>x[-c(2, 10)]</code></pre>
-<pre><code>##  [1] -0.3370085         NA         NA -0.5446850  0.4069071  0.4127180
-##  [7]         NA -0.1624554         NA  0.6803633         NA  2.0167127
-## [13]         NA  1.7233937  2.5601341 -1.3037740  0.6705978         NA
-## [19]  0.1171085         NA  0.7867832         NA         NA         NA
-## [25]  0.4398478         NA  1.2712580         NA         NA         NA
-## [31]         NA         NA         NA -1.6271037 -0.6653891         NA
-## [37]  1.4460880 -0.7411789</code></pre>
+<pre><code>##  [1] -0.73063446 -1.16753808  0.14637887          NA          NA          NA
+##  [7] -0.49591811 -0.05857883  0.53330157          NA          NA  1.22492538
+## [13] -0.52732965          NA  0.02512317          NA          NA          NA
+## [19]  0.21245589          NA -0.73669234          NA  0.37744541          NA
+## [25] -0.45367206          NA          NA -0.89876120          NA          NA
+## [31] -0.48343491 -0.27182534 -0.91219286          NA -0.65748730          NA
+## [37]          NA  0.55271879</code></pre>
 <p>So far, we’ve covered three types of index vectors – logical, positive integer, and negative integer. The only remaining type requires us to introduce the concept of ‘named’ elements.</p>
 <p>Create a numeric vector with three named elements using vect &lt;- c(foo = 11, bar = 2, norf = NA).</p>
 <pre class="r"><code>vect &lt;- c(foo = 11, bar = 2, norf = NA)</code></pre>
