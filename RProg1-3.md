@@ -314,12 +314,15 @@ dir()
 ##  [1] "flag_data.csv"             "mytest2.R"                
 ##  [3] "mytest3.R"                 "R-Programming-Notes.Rproj"
 ##  [5] "README.md"                 "RProg1-3.html"            
-##  [7] "RProg1-3.Rmd"              "RProg1.html"              
-##  [9] "RProg10-12.html"           "RProg10-12.Rmd"           
-## [11] "RProg13-15.html"           "RProg13-15.Rmd"           
-## [13] "RProg4-6.html"             "RProg4-6.Rmd"             
-## [15] "RProg7-9.html"             "RProg7-9.Rmd"             
-## [17] "testdir"                   "testdir2"
+##  [7] "RProg1-3.md"               "RProg1-3.Rmd"             
+##  [9] "RProg1.html"               "RProg10-12.html"          
+## [11] "RProg10-12.md"             "RProg10-12.Rmd"           
+## [13] "RProg13-15_files"          "RProg13-15.html"          
+## [15] "RProg13-15.md"             "RProg13-15.Rmd"           
+## [17] "RProg4-6.html"             "RProg4-6.md"              
+## [19] "RProg4-6.Rmd"              "RProg7-9.html"            
+## [21] "RProg7-9.md"               "RProg7-9.Rmd"             
+## [23] "testdir"                   "testdir2"
 ```
 
 Use the args() function to determine the arguments to list.files().
@@ -387,13 +390,16 @@ dir()
 ##  [1] "flag_data.csv"             "mytest.R"                 
 ##  [3] "mytest2.R"                 "mytest3.R"                
 ##  [5] "R-Programming-Notes.Rproj" "README.md"                
-##  [7] "RProg1-3.html"             "RProg1-3.Rmd"             
-##  [9] "RProg1.html"               "RProg10-12.html"          
-## [11] "RProg10-12.Rmd"            "RProg13-15.html"          
-## [13] "RProg13-15.Rmd"            "RProg4-6.html"            
-## [15] "RProg4-6.Rmd"              "RProg7-9.html"            
-## [17] "RProg7-9.Rmd"              "testdir"                  
-## [19] "testdir2"
+##  [7] "RProg1-3.html"             "RProg1-3.md"              
+##  [9] "RProg1-3.Rmd"              "RProg1.html"              
+## [11] "RProg10-12.html"           "RProg10-12.md"            
+## [13] "RProg10-12.Rmd"            "RProg13-15_files"         
+## [15] "RProg13-15.html"           "RProg13-15.md"            
+## [17] "RProg13-15.Rmd"            "RProg4-6.html"            
+## [19] "RProg4-6.md"               "RProg4-6.Rmd"             
+## [21] "RProg7-9.html"             "RProg7-9.md"              
+## [23] "RProg7-9.Rmd"              "testdir"                  
+## [25] "testdir2"
 ```
 
 Check to see if "mytest.R" exists in the working directory using the file.exists() function.
@@ -418,9 +424,9 @@ file.info("mytest.R")
 
 ```
 ##          size isdir mode               mtime               ctime
-## mytest.R    0 FALSE  644 2020-04-18 14:54:05 2020-04-18 14:54:05
+## mytest.R    0 FALSE  644 2020-05-18 14:50:11 2020-05-18 14:50:11
 ##                        atime uid gid            uname grname
-## mytest.R 2020-04-18 14:54:05 501  20 shaneconnaughton  staff
+## mytest.R 2020-05-18 14:50:11 501  20 shaneconnaughton  staff
 ```
 
 You can use the $ operator --- e.g., file.info("mytest.R")$mode --- to grab specific items.
@@ -485,4 +491,11 @@ dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
 ## 'testdir2/testdir3' already exists
 ```
 
+Move a file from one folder to another
+
+
+```r
+library(filesstrings)
+file.move("/Users/Section4/qplot.R", "/Users/Section4/Swirl")
+```
  

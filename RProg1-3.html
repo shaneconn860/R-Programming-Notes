@@ -474,12 +474,15 @@ summary {
 <pre><code>##  [1] &quot;flag_data.csv&quot;             &quot;mytest2.R&quot;                
 ##  [3] &quot;mytest3.R&quot;                 &quot;R-Programming-Notes.Rproj&quot;
 ##  [5] &quot;README.md&quot;                 &quot;RProg1-3.html&quot;            
-##  [7] &quot;RProg1-3.Rmd&quot;              &quot;RProg1.html&quot;              
-##  [9] &quot;RProg10-12.html&quot;           &quot;RProg10-12.Rmd&quot;           
-## [11] &quot;RProg13-15.html&quot;           &quot;RProg13-15.Rmd&quot;           
-## [13] &quot;RProg4-6.html&quot;             &quot;RProg4-6.Rmd&quot;             
-## [15] &quot;RProg7-9.html&quot;             &quot;RProg7-9.Rmd&quot;             
-## [17] &quot;testdir&quot;                   &quot;testdir2&quot;</code></pre>
+##  [7] &quot;RProg1-3.md&quot;               &quot;RProg1-3.Rmd&quot;             
+##  [9] &quot;RProg1.html&quot;               &quot;RProg10-12.html&quot;          
+## [11] &quot;RProg10-12.md&quot;             &quot;RProg10-12.Rmd&quot;           
+## [13] &quot;RProg13-15_files&quot;          &quot;RProg13-15.html&quot;          
+## [15] &quot;RProg13-15.md&quot;             &quot;RProg13-15.Rmd&quot;           
+## [17] &quot;RProg4-6.html&quot;             &quot;RProg4-6.md&quot;              
+## [19] &quot;RProg4-6.Rmd&quot;              &quot;RProg7-9.html&quot;            
+## [21] &quot;RProg7-9.md&quot;               &quot;RProg7-9.Rmd&quot;             
+## [23] &quot;testdir&quot;                   &quot;testdir2&quot;</code></pre>
 <p>Use the args() function to determine the arguments to list.files().</p>
 <pre class="r"><code>args(list.files)</code></pre>
 <pre><code>## function (path = &quot;.&quot;, pattern = NULL, all.files = FALSE, full.names = FALSE, 
@@ -503,13 +506,16 @@ summary {
 <pre><code>##  [1] &quot;flag_data.csv&quot;             &quot;mytest.R&quot;                 
 ##  [3] &quot;mytest2.R&quot;                 &quot;mytest3.R&quot;                
 ##  [5] &quot;R-Programming-Notes.Rproj&quot; &quot;README.md&quot;                
-##  [7] &quot;RProg1-3.html&quot;             &quot;RProg1-3.Rmd&quot;             
-##  [9] &quot;RProg1.html&quot;               &quot;RProg10-12.html&quot;          
-## [11] &quot;RProg10-12.Rmd&quot;            &quot;RProg13-15.html&quot;          
-## [13] &quot;RProg13-15.Rmd&quot;            &quot;RProg4-6.html&quot;            
-## [15] &quot;RProg4-6.Rmd&quot;              &quot;RProg7-9.html&quot;            
-## [17] &quot;RProg7-9.Rmd&quot;              &quot;testdir&quot;                  
-## [19] &quot;testdir2&quot;</code></pre>
+##  [7] &quot;RProg1-3.html&quot;             &quot;RProg1-3.md&quot;              
+##  [9] &quot;RProg1-3.Rmd&quot;              &quot;RProg1.html&quot;              
+## [11] &quot;RProg10-12.html&quot;           &quot;RProg10-12.md&quot;            
+## [13] &quot;RProg10-12.Rmd&quot;            &quot;RProg13-15_files&quot;         
+## [15] &quot;RProg13-15.html&quot;           &quot;RProg13-15.md&quot;            
+## [17] &quot;RProg13-15.Rmd&quot;            &quot;RProg4-6.html&quot;            
+## [19] &quot;RProg4-6.md&quot;               &quot;RProg4-6.Rmd&quot;             
+## [21] &quot;RProg7-9.html&quot;             &quot;RProg7-9.md&quot;              
+## [23] &quot;RProg7-9.Rmd&quot;              &quot;testdir&quot;                  
+## [25] &quot;testdir2&quot;</code></pre>
 <p>Check to see if “mytest.R” exists in the working directory using the file.exists() function.</p>
 <pre class="r"><code>file.exists(&quot;mytest.R&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -517,9 +523,9 @@ summary {
 <p>Access information about the file “mytest.R” by using file.info().</p>
 <pre class="r"><code>file.info(&quot;mytest.R&quot;)</code></pre>
 <pre><code>##          size isdir mode               mtime               ctime
-## mytest.R    0 FALSE  644 2020-04-18 14:54:05 2020-04-18 14:54:05
+## mytest.R    0 FALSE  644 2020-05-18 14:50:11 2020-05-18 14:50:11
 ##                        atime uid gid            uname grname
-## mytest.R 2020-04-18 14:54:05 501  20 shaneconnaughton  staff</code></pre>
+## mytest.R 2020-05-18 14:50:11 501  20 shaneconnaughton  staff</code></pre>
 <p>You can use the $ operator — e.g., file.info(“mytest.R”)$mode — to grab specific items.</p>
 <p>Change the name of the file “mytest.R” to “mytest2.R” by using file.rename().</p>
 <pre class="r"><code>file.rename(&quot;mytest.R&quot;, &quot;mytest2.R&quot;)</code></pre>
@@ -539,6 +545,9 @@ summary {
 <pre class="r"><code>dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)</code></pre>
 <pre><code>## Warning in dir.create(file.path(&quot;testdir2&quot;, &quot;testdir3&quot;), recursive = TRUE):
 ## 'testdir2/testdir3' already exists</code></pre>
+<p>Move a file from one folder to another</p>
+<pre class="r"><code>library(filesstrings)
+file.move(&quot;/Users/Section4/qplot.R&quot;, &quot;/Users/Section4/Swirl&quot;)</code></pre>
 </div>
 
 

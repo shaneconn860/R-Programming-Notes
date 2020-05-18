@@ -294,4 +294,10 @@ Create a directory in the current working directory called "testdir2" and a subd
 dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
 ```
 
+Move a file from one folder to another
+
+```{r, eval=FALSE}
+library(filesstrings)
+file.move("/Users/Section4/qplot.R", "/Users/Section4/Swirl")
+```
  
